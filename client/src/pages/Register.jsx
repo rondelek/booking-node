@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -9,6 +10,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import logo from "../assets/images/logo.svg";
+import { useAppContext } from "../context/appContext";
+import { Alert, Snackbar } from "@mui/material";
 
 const initialState = {
   name: "",
@@ -18,7 +21,19 @@ const initialState = {
 };
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const [values, setValues] = useState(initialState);
+
+  const {
+    user,
+    displayAlertError,
+    showAlert,
+    alertType,
+    alertText,
+    isLoading,
+    registerUser,
+  } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -26,13 +41,35 @@ export default function Register() {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+      displayAlertError();
+      return;
+    }
+
+    const currentUser = { name, email, password };
+
+    if (isMember) {
+      console.log("already a member");
+    } else {
+      registerUser(currentUser);
+    }
+
     console.log(values);
   };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, [user, navigate]);
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -70,6 +107,17 @@ export default function Register() {
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
+            <Snackbar
+              open={showAlert}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+            >
+              <Alert severity={alertType} sx={{ width: "100%" }}>
+                {alertText}
+              </Alert>
+            </Snackbar>
             {!values.isMember && (
               <TextField
                 value={values.name}
@@ -113,10 +161,10 @@ export default function Register() {
               label="Remember me"
             />
             <Button
-              onClick={toggleMember}
               type="submit"
               fullWidth
               variant="contained"
+              disabled={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
               {values.isMember ? "Sign In" : "Sign Up"}
@@ -133,7 +181,7 @@ export default function Register() {
                     ? "Don't have an account?"
                     : "Already a member?"}
 
-                  <span className="font-bold">
+                  <span className="font-bold" onClick={toggleMember}>
                     {" "}
                     {values.isMember ? "Sign Up" : "Sign In"}
                   </span>
