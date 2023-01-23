@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Dashboard, Error, Landing, Register } from "./pages";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const theme = createTheme({
   palette: {
@@ -48,7 +49,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/landing" element={<Landing />} />
+          <Route
+            path="/landing"
+            element={
+              <ProtectedRoute>
+                <Landing />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

@@ -33,6 +33,8 @@ export default function Register() {
     alertText,
     isLoading,
     registerUser,
+    loginUser,
+    setupUser,
   } = useAppContext();
 
   const toggleMember = () => {
@@ -55,9 +57,17 @@ export default function Register() {
     const currentUser = { name, email, password };
 
     if (isMember) {
-      console.log("already a member");
+      setupUser({
+        currentUser,
+        endpoint: "login",
+        alertText: "Login successful! Redirecting...",
+      });
     } else {
-      registerUser(currentUser);
+      setupUser({
+        currentUser,
+        endpoint: "register",
+        alertText: "User registered! Redirecting...",
+      });
     }
 
     console.log(values);
@@ -99,7 +109,7 @@ export default function Register() {
             <img src={logo} alt="" className="w-12" />
           </Box>
           <Typography component="h1" variant="h5">
-            Sign in
+            {values.isMember ? "Sign In" : "Sign Up"}
           </Typography>
           <Box
             component="form"
