@@ -32,8 +32,6 @@ export default function Register() {
     alertType,
     alertText,
     isLoading,
-    registerUser,
-    loginUser,
     setupUser,
   } = useAppContext();
 
