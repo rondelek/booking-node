@@ -49,12 +49,92 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "UPDATE_USER_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "UPDATE_USER_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      token: action.payload.token,
+      user: action.payload.user,
+      userLocation: action.payload.location,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Profile updated!",
+    };
+  }
+
+  if (action.type === "UPDATE_USER_ERROR") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "error",
+      alertText: action.payload.msg,
+    };
+  }
+
   if (action.type === "LOGOUT_USER") {
     return {
       ...initialState,
       user: null,
       token: null,
       userLocation: null,
+    };
+  }
+
+  if (action.type === "HANDLE_CHANGE") {
+    return {
+      ...state,
+      [action.payload.name]: action.payload.value,
+    };
+  }
+
+  if (action.type === "CLEAR_VALUES") {
+    const initialState = {
+      name: "",
+      level: "",
+      type: "",
+      groupLimit: 0,
+      price: 0,
+      startsAt: "",
+    };
+
+    return {
+      ...state,
+      ...initialState,
+    };
+  }
+
+  if (action.type === "CREATE_COURSE_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "CREATE_COURSE_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Course created!",
+    };
+  }
+
+  if (action.type === "CREATE_COURSE_ERROR") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "error",
+      alertText: action.payload.msg,
     };
   }
 

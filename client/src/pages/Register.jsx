@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/appContext";
+import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -9,9 +11,11 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import logo from "../assets/images/logo.svg";
-import { useAppContext } from "../context/appContext";
 import { Alert, Snackbar } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const initialState = {
   name: "",
@@ -24,6 +28,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [values, setValues] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     user,
@@ -34,6 +39,8 @@ export default function Register() {
     isLoading,
     setupUser,
   } = useAppContext();
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -87,7 +94,7 @@ export default function Register() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random/?travel)",
+          backgroundImage: "url(https://source.unsplash.com/random/?language)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -104,7 +111,7 @@ export default function Register() {
           }}
         >
           <Box className="mb-2">
-            <img src={logo} alt="" className="w-12" />
+            <SpeakerNotesIcon color="primary" sx={{ width: "4rem" }} />
           </Box>
           <Typography component="h1" variant="h5">
             {values.isMember ? "Sign In" : "Sign Up"}
@@ -160,9 +167,22 @@ export default function Register() {
               fullWidth
               name="password"
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

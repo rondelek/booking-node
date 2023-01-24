@@ -10,6 +10,10 @@
   .flex-column {
     @apply flex flex-col justify-center items-center;
   }
+
+  .icon-click {
+    @apply h-7 w-7 cursor-pointer opacity-70;
+  }
 }
 
 :root {
@@ -20,14 +24,17 @@
   --red-dark: #ce0b32;
   --white: rgb(248 250 252);
   --gold: #ffd700;
+  --yellow: #f8c36f;
 }
 
-p {
-  color: var(--gray);
+h1 {
+  font-size: 2rem;
+  line-height: 2.6rem;
+  font-weight: 700;
 }
 
 h2 {
   font-size: 1.875rem;
   line-height: 2.25rem;
-  font-weight: 700;
+  font-weight: 500;
 }
