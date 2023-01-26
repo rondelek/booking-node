@@ -9,8 +9,9 @@ import morgan from "morgan";
 import connectDB from "./db/connect.js";
 
 // routes
-import authRouter from "./routes/authRoutes.js";
+import authRouter from "./routes/authRouter.js";
 import coursesRouter from "./routes/coursesRouter.js";
+import adminRouter from "./routes/adminRouter.js";
 
 // middleware
 import errorHandlerMiddleware from "./middleware/error-handler.js";
@@ -29,6 +30,7 @@ app.get("/api/v1", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/courses", authenticateUser, coursesRouter);
+app.use("/api/v1/admin", authenticateUser, adminRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

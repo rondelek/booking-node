@@ -3,15 +3,9 @@ const router = express.Router();
 
 import {
   createCourse,
-  //   deleteCourse,
-  //   getAllCourses,
-  //   updateCourse,
+  getNewCourses,
 } from "../controllers/coursesController.js";
 
-// import testUser from "../middleware/testUser.js";
-
-router.route("/").post(createCourse);
-// .get(getAllCourses);
-// router.route("/:id").delete(deleteCourse).patch(updateCourse);
+router.route("/").post(createCourse).get(getNewCourses);
 
 export default router;

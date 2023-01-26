@@ -21,6 +21,7 @@ export default function CreateCourse() {
     alertType,
     alertText,
     displayAlertError,
+    getNewCourses,
   } = useAppContext();
 
   const handleCourseInput = (e) => {
@@ -46,6 +47,7 @@ export default function CreateCourse() {
     <div>
       <h1>create course</h1>
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
+        <button onClick={getNewCourses}>fdfd</button>
         <Snackbar
           open={showAlert}
           anchorOrigin={{

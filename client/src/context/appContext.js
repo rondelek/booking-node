@@ -1,10 +1,9 @@
-import React, { useReducer, useContext, useEffect } from "react";
+import React, { useReducer, useContext, useEffect, useState } from "react";
 import reducer from "./reducer";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
-const userLocation = localStorage.getItem("location");
 
 const initialState = {
   alertType: "",
@@ -13,13 +12,16 @@ const initialState = {
   isLoading: false,
   user: user ? JSON.parse(user) : null,
   token: token,
-  userLocation: userLocation || "",
   name: "",
   level: "",
   type: "",
   groupLimit: 0,
   price: 0,
   startsAt: "",
+  newCourses: [],
+  allStudents: [],
+  updateStudentID: "",
+  isPaid: "",
 };
 
 const AppContext = React.createContext();
@@ -74,7 +76,6 @@ const AppProvider = ({ children }) => {
   };
 
   const removeUserFromLocalStorage = ({ user, token, location }) => {
-    console.log("logout");
     localStorage.removeItem("user", user);
     localStorage.removeItem("token", token);
     localStorage.removeItem("location", location);
@@ -114,7 +115,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "UPDATE_USER_BEGIN" });
 
     try {
-      const { data } = await authFetch.patch("/auth/updateUser", currentUser);
+      const { data } = await authFetch.patch("/auth", currentUser);
       const { user, token } = data;
       dispatch({ type: "UPDATE_USER_SUCCESS", payload: { user, token } });
       addUserToLocalStorage({ user, token });
@@ -128,6 +129,28 @@ const AppProvider = ({ children }) => {
 
       clearAlert();
     }
+  };
+
+  const setUpdateStudent = async (id, isPaid) => {
+    dispatch({ type: "SET_UPDATE_STUDENT", payload: { id, isPaid } });
+  };
+
+  const updateStudent = async () => {
+    dispatch({ type: "UPDATE_STUDENT_BEGIN" });
+    try {
+      const { isPaid } = state;
+      await authFetch.patch(`admin/students/${state.updateStudentID}`, {
+        isPaid,
+      });
+      dispatch({ type: "UPDATE_STUDENT_SUCCESS" });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: "UPDATE_STUDENT_ERROR",
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
   };
 
   const handleChange = ({ name, value }) => {
@@ -166,6 +189,42 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const getNewCourses = async () => {
+    dispatch({ type: "GET_NEW_COURSES_BEGIN" });
+    try {
+      const { data } = await authFetch("/courses");
+      const { newCourses } = data;
+      dispatch({
+        type: "GET_NEW_COURSES_SUCCESS",
+        payload: {
+          newCourses,
+        },
+      });
+    } catch (error) {
+      // logoutUser();
+    }
+  };
+
+  const getAllStudents = async () => {
+    dispatch({ type: "GET_ALL_STUDENTS_BEGIN" });
+    try {
+      const { data } = await authFetch("/admin");
+      const { allStudents } = data;
+      dispatch({
+        type: "GET_ALL_STUDENTS_SUCCESS",
+        payload: {
+          allStudents,
+        },
+      });
+    } catch (error) {
+      // logoutUser();
+    }
+  };
+
+  useEffect(() => {
+    getAllStudents();
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -178,6 +237,10 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearValues,
         createCourse,
+        getNewCourses,
+        getAllStudents,
+        setUpdateStudent,
+        updateStudent,
       }}
     >
       {children}

@@ -79,6 +79,46 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "SET_UPDATE_STUDENT") {
+    const student = state.allStudents.find(
+      (student) => student._id === action.payload.id
+    );
+    const { _id } = student;
+    console.log(_id, action.payload.isPaid);
+    return {
+      ...state,
+      updateStudentID: _id,
+      isPaid: action.payload.isPaid,
+    };
+  }
+
+  if (action.type === "UPDATE_STUDENT_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "UPDATE_STUDENT_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Profile updated!",
+    };
+  }
+
+  if (action.type === "UPDATE_STUDENT_ERROR") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "error",
+      alertText: action.payload.msg,
+    };
+  }
+
   if (action.type === "LOGOUT_USER") {
     return {
       ...initialState,
@@ -135,6 +175,36 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: "error",
       alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === "GET_NEW_COURSES_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "GET_NEW_COURSES_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      newCourses: action.payload.newCourses,
+    };
+  }
+
+  if (action.type === "GET_ALL_STUDENTS_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "GET_ALL_STUDENTS_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      allStudents: action.payload.allStudents,
     };
   }
 

@@ -6,7 +6,7 @@ export default function SharedLayout() {
     <div>
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

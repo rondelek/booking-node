@@ -17,6 +17,7 @@
 }
 
 :root {
+  background-color: rgb(253, 253, 253);
   --dark: #09153d;
   --red: #ee1c47;
   --orange: #ff823a;

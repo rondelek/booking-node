@@ -42,6 +42,22 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     default: "City",
   },
+
+  lastLesson: {
+    type: String,
+  },
+
+  nextLesson: {
+    type: Date,
+  },
+
+  homework: {
+    type: String,
+  },
+
+  isPaid: {
+    type: Boolean,
+  },
 });
 
 UserSchema.pre("save", async function () {
