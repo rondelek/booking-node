@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
 
 export default function DropdownMenu() {
-  const { logoutUser } = useAppContext();
+  const { user, logoutUser } = useAppContext();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -26,17 +26,31 @@ export default function DropdownMenu() {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              ml: 2,
+            }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
             <UserCircleIcon className="icon-click" />
+            <p className="text-xs">{user?.name}</p>
           </IconButton>
         </Tooltip>
       </Box>

@@ -43,12 +43,20 @@ const UserSchema = new mongoose.Schema({
     default: "City",
   },
 
-  lastLesson: {
+  lastLessonDate: {
+    type: Date,
+  },
+
+  nextLessonDate: {
+    type: Date,
+  },
+
+  lastLessonDescription: {
     type: String,
   },
 
-  nextLesson: {
-    type: Date,
+  nextLessonDescription: {
+    type: String,
   },
 
   homework: {

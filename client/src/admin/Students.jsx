@@ -3,6 +3,10 @@ import { useAppContext } from "../context/appContext";
 
 import { DataGrid } from "@mui/x-data-grid";
 
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { Button } from "@mui/material";
+
 export default function Students() {
   const {
     user,
@@ -15,13 +19,34 @@ export default function Students() {
 
   useEffect(() => {
     if (isPaid !== "") {
-      console.log("isPaid", isPaid);
       updateStudent();
     }
   }, [isPaid]);
 
+  const handleCellClick = () => {
+    console.log("handle cell click");
+  };
+
   const columns = [
-    { field: "name", headerName: "Imię", flex: 1 },
+    {
+      field: "name",
+      headerName: "Imię",
+      flex: 1,
+      renderCell: (params) => {
+        return (
+          <>
+            <p
+              onClick={(event) => {
+                handleCellClick(event, params);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              {params.value}
+            </p>
+          </>
+        );
+      },
+    },
     { field: "email", headerName: "Email", flex: 1 },
     {
       field: "isPaid",
@@ -29,16 +54,39 @@ export default function Students() {
       flex: 1,
       editable: true,
       type: "boolean",
+      renderCell: (params) => {
+        return params.value ? (
+          <CheckCircleIcon
+            style={{
+              color: "green",
+            }}
+          />
+        ) : (
+          <CancelIcon
+            style={{
+              color: "red",
+            }}
+          />
+        );
+      },
     },
     {
-      field: "nextLesson",
-      headerName: "Następna lekcja",
+      field: "price",
+      headerName: "Wysokość opłaty",
       flex: 1,
       editable: true,
-      type: "date",
+      type: "number",
     },
-    { field: "lastLesson", headerName: "Ostatnia lekcja", flex: 1 },
-    { field: "homework", headerName: "Zadanie domowe", flex: 1 },
+    {
+      field: "lessonsFinished",
+      headerName: "Liczba zrealizowanych lekcji",
+      flex: 1,
+    },
+    {
+      field: "lessonsLimit",
+      headerName: "Liczba wykupionych godzin",
+      flex: 1,
+    },
   ];
 
   useEffect(() => {
@@ -48,12 +96,6 @@ export default function Students() {
   if (allStudents.length === 0) {
     return <h2>Brak nowych kursów.</h2>;
   }
-
-  const handleSetUpdate = (cellData) => {
-    // const { id, field, value, row, name } = cellData;
-    // console.log(row._id, cellData.value);
-    // setUpdateStudent(row._id, value);
-  };
 
   const handleUpdate = (cellData) => {
     const { row } = cellData;
@@ -70,7 +112,6 @@ export default function Students() {
         columns={columns}
         getRowId={(row) => row._id}
         onCellEditCommit={handleUpdate}
-        onCellClick={handleSetUpdate}
         hideFooter={true}
       />
     </div>

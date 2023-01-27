@@ -84,7 +84,6 @@ const reducer = (state, action) => {
       (student) => student._id === action.payload.id
     );
     const { _id } = student;
-    console.log(_id, action.payload.isPaid);
     return {
       ...state,
       updateStudentID: _id,
