@@ -47,21 +47,30 @@ const UserSchema = new mongoose.Schema({
     type: Date,
   },
 
-  nextLessonDate: {
-    type: Date,
+  nextLesson: {
+    date: Date,
+    subject: String,
+    homework: String,
   },
 
-  lastLessonDescription: {
-    type: String,
-  },
+  // nextLessonDate: {
+  //   type: Date,
+  // },
 
-  nextLessonDescription: {
-    type: String,
-  },
+  lastLessons: [
+    {
+      date: Date,
+      subject: String,
+    },
+  ],
 
-  homework: {
-    type: String,
-  },
+  // nextLesson: {
+  //   type: String,
+  // },
+
+  // homework: {
+  //   type: String,
+  // },
 
   isPaid: {
     type: Boolean,

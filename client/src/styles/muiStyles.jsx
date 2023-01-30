@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import { withStyles } from "@mui/styles";
+import { Button, TextareaAutosize } from "@mui/material";
+import { styled } from "@mui/system";
 import { createTheme } from "@mui/material/styles";
 // ******* THEME ********
 
@@ -40,33 +40,52 @@ const theme = createTheme({
         },
       },
     },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          "&:last-of-type": {
+            borderBottomLeftRadius: "1rem",
+            borderBottomRightRadius: "1rem",
+          },
+        },
+      },
+    },
   },
 });
 
 // ******* BUTTONS ********
 
-const GreenButton = withStyles({
-  root: {
-    backgroundColor: "green",
-    color: "#fff",
-    width: "120px",
-    "&:hover": {
-      backgroundColor: "#fff",
-      color: "green",
-    },
+const GreenButton = styled(Button)({
+  backgroundColor: "#C1E1C1",
+  color: "#fff",
+  width: "120px",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: "#C1E1C1",
   },
-})(Button);
+});
 
-const RedButton = withStyles({
-  root: {
-    backgroundColor: "red",
-    color: "#fff",
-    width: "120px",
-    "&:hover": {
-      backgroundColor: "#fff",
-      color: "red",
-    },
+const RedButton = styled(Button)({
+  backgroundColor: "#ff6961",
+  color: "#fff",
+  width: "120px",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: "#ff6961",
   },
-})(Button);
+});
 
-export { GreenButton, RedButton, theme };
+// ******* TEXTAREA ********
+
+const TextAreaStyle = styled(TextareaAutosize)({
+  border: "2px solid #f8c46f",
+  width: "100%",
+  flexGrow: 1,
+  boxSizing: "border-box",
+  borderRadius: 3,
+  backgroundColor: "#f8f8f8",
+  resize: "none",
+  padding: ".5rem",
+});
+
+export { GreenButton, RedButton, TextAreaStyle, theme };

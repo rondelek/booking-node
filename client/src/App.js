@@ -7,6 +7,7 @@ import Profile from "./user/Profile";
 import NewCourses from "./courses/NewCourses";
 import { Students, CreateCourse } from "./admin";
 import { theme } from "../src/styles/muiStyles";
+import "moment/locale/pl";
 
 function App() {
   return (

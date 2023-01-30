@@ -3,11 +3,17 @@ import Wrapper from "../assets/wrappers/Navbar";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import DropdownMenu from "./DropdownMenu";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../context/appContext";
 
 export default function Navbar() {
+  const { openDrawer, setOpenDrawer, toggleDrawer } = useAppContext();
+
   return (
     <Wrapper>
-      <Bars3CenterLeftIcon className="icon-click" />
+      <Bars3CenterLeftIcon
+        onClick={toggleDrawer(openDrawer, true)}
+        className="icon-click"
+      />
       <Link to="/">
         <div className="flex items-center space-x-[6px]">
           <SpeakerNotesIcon color="primary" />

@@ -29,6 +29,51 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [lastLessons, setLastLessons] = useState(state.user?.lastLessons);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [editHomework, setEditHomework] = useState(false);
+  const [editNextLesson, setEditNextLesson] = useState(false);
+  const [editLesson, setEditLesson] = useState(false);
+  const [isEdited, setIsEdited] = useState("");
+  const [editTitle, setEditTitle] = useState("");
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    setOpenDrawer(!openDrawer);
+  };
+
+  const toggleEditLesson = () => {
+    setEditLesson(!editLesson);
+  };
+
+  const toggleNextLesson = () => {
+    setEditNextLesson(!editNextLesson);
+  };
+
+  const handleEditHomework = () => {
+    setIsEdited("homework");
+    setEditTitle("Przydziel zadanie domowe");
+    toggleEditLesson();
+  };
+
+  const handleEditNextLesson = () => {
+    setIsEdited("nextLesson");
+    setEditTitle("Zmień temat kolejnych zajęć");
+    toggleEditLesson();
+  };
+
+  const handleEditNextLessonDate = () => {
+    setIsEdited("nextLessonDate");
+    setEditTitle("Zmień datę kolejnych zajęć");
+    toggleEditLesson();
+  };
+
+  const handleEditNextLessonTime = () => {
+    setIsEdited("nextLessonTime");
+    setEditTitle("Zmień godzinę kolejnych zajęć");
+    toggleEditLesson();
+  };
+
   // axios
   const authFetch = axios.create({
     baseURL: "/api/v1",
@@ -112,8 +157,8 @@ const AppProvider = ({ children }) => {
   };
 
   const updateUser = async (currentUser) => {
+    console.log(currentUser);
     dispatch({ type: "UPDATE_USER_BEGIN" });
-
     try {
       const { data } = await authFetch.patch("/auth", currentUser);
       const { user, token } = data;
@@ -241,6 +286,27 @@ const AppProvider = ({ children }) => {
         getAllStudents,
         setUpdateStudent,
         updateStudent,
+        openDrawer,
+        setOpenDrawer,
+        toggleDrawer,
+        editHomework,
+        setEditHomework,
+        toggleNextLesson,
+        editNextLesson,
+        setEditNextLesson,
+        editLesson,
+        setEditLesson,
+        toggleEditLesson,
+        isEdited,
+        setIsEdited,
+        handleEditHomework,
+        handleEditNextLesson,
+        handleEditNextLessonDate,
+        handleEditNextLessonTime,
+        editTitle,
+        setEditLesson,
+        lastLessons,
+        setLastLessons,
       }}
     >
       {children}

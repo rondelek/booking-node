@@ -63,6 +63,8 @@ const reducer = (state, action) => {
       token: action.payload.token,
       user: action.payload.user,
       userLocation: action.payload.location,
+      nextLesson: action.payload.nextLesson,
+      lastLessons: action.payload.lastLessons,
       showAlert: true,
       alertType: "success",
       alertText: "Profile updated!",

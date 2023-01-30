@@ -51,19 +51,30 @@ const login = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { email, name, lastName, lastLesson, nextLesson, homework, isPaid } =
-    req.body;
-  if (!email || !name || !lastName) {
+  const {
+    email,
+    name,
+    lastName,
+    lastLesson,
+    nextLesson,
+    nextLessonDate,
+    homework,
+    isPaid,
+    lastLessons,
+  } = req.body;
+
+  if (!email || !name) {
     throw new BadRequestError("Provide all values.");
   }
+
   const user = await User.findOne({ _id: req.user.userID });
   user.email = email;
   user.name = name;
   user.lastName = lastName;
-  user.lastLesson = lastLesson;
   user.nextLesson = nextLesson;
   user.homework = homework;
   user.isPaid = isPaid;
+  // user.lastLessons = lastLessons;
 
   await user.save();
 

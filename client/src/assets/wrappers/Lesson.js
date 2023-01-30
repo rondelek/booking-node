@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   h1,
   h2 {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.5rem;
     background-color: var(--yellow);
     border-top-left-radius: 1rem;

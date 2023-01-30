@@ -192,7 +192,7 @@ export default function Register() {
               type="submit"
               fullWidth
               variant="contained"
-              disabled={isLoading}
+              // disabled={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
               {values.isMember ? "Sign In" : "Sign Up"}
