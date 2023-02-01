@@ -1,22 +1,36 @@
-import { TextField } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../context/appContext";
 import { TextAreaStyle } from "../styles/muiStyles";
+
+import {
+  Link,
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  SendIcon,
+} from ".";
+
+import moment from "moment";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from "@mui/material";
+import AlertSnackbar from "../components/Alert";
 
 export default function EditLesson() {
   const {
     user,
     editLesson,
     toggleEditLesson,
-    updateUser,
     isEdited,
     editTitle,
+    sendNewLesson,
   } = useAppContext();
 
   const [homework, setHomework] = useState(user.nextLesson.homework);
@@ -27,6 +41,12 @@ export default function EditLesson() {
   const [nextLessonTime, setNextLessonTime] = useState(
     user.nextLesson.date.split("T")[1]
   );
+
+  const [newDate, setNewDate] = useState(nextLessonDate.replace("Z", ""));
+  const [newLesson, setNewLesson] = useState({
+    date: nextLessonDate.replace("Z", ""),
+    msg: "",
+  });
 
   const [nextLesson, setNextLesson] = useState(user.nextLesson);
 
@@ -63,12 +83,26 @@ export default function EditLesson() {
   const handleUpdateLesson = (e) => {
     e.preventDefault();
 
-    updateUser({ nextLesson, name, email });
+    // updateUser({ nextLesson, name, email });
     toggleEditLesson();
+  };
+
+  const handleSendNewLesson = () => {
+    sendNewLesson(newLesson);
+    toggleEditLesson();
+  };
+
+  const handleNewDate = (e) => {
+    setNewLesson({ ...newLesson, date: e.target.value });
+  };
+
+  const handleMessageToTutor = (e) => {
+    setNewLesson({ ...newLesson, msg: e.target.value });
   };
 
   return (
     <div>
+      <AlertSnackbar />
       <Dialog open={editLesson} onClose={toggleEditLesson}>
         <DialogTitle>{editTitle}</DialogTitle>
         <DialogContent>
@@ -96,16 +130,54 @@ export default function EditLesson() {
             />
           )}
           {isEdited === "nextLessonDate" && (
-            <TextField
-              id="date"
-              type="date"
-              defaultValue={nextLessonDate}
-              onChange={handleNextLessonDateChange}
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
+            <div className="flex flex-col gap-4">
+              <p>Zaproponuj termin przełożonych zajęć:</p>
+              {/* <TextField
+                id="date"
+                type="date"
+                defaultValue={nextLessonDate}
+                onChange={handleNextLessonDateChange}
+                sx={{ width: 220 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              /> */}
+              <TextField
+                id="datetime-local"
+                // label="Next appointment"
+                onChange={handleNewDate}
+                type="datetime-local"
+                value={newLesson.date}
+                // defaultValue="2017-05-24T10:30"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <Accordion elevation={0} disableGutters={true}>
+                <AccordionSummary
+                  disableGutters={true}
+                  // expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>
+                    lub <Link>napisz do lektora</Link>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <TextAreaStyle
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    type="text"
+                    variant="outlined"
+                    value={newLesson.msg}
+                    minRows={3}
+                    onChange={handleMessageToTutor}
+                  />
+                </AccordionDetails>
+              </Accordion>
+            </div>
           )}
           {isEdited === "nextLessonTime" && (
             <TextField
@@ -127,8 +199,12 @@ export default function EditLesson() {
             marginBottom: ".5rem",
           }}
         >
-          <Button variant="contained" onClick={handleUpdateLesson}>
-            Zapisz
+          <Button
+            variant="contained"
+            endIcon={<SendIcon />}
+            onClick={handleSendNewLesson}
+          >
+            wyślij
           </Button>
         </DialogActions>
       </Dialog>

@@ -20,7 +20,7 @@ export default function LessonsHistory() {
     <Wrapper>
       <h2>
         <span>
-          <HistoryIcon sx={{ height: "50px" }} />
+          <HistoryIcon sx={{ height: "40px" }} />
         </span>
         Historia zajęć
       </h2>

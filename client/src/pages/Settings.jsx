@@ -4,6 +4,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useAppContext } from "../context/appContext";
 import { useState } from "react";
 import { Alert, Button, Snackbar } from "@mui/material";
+import AlertSnackbar from "../components/Alert";
 
 export default function Settings() {
   const {
@@ -44,19 +45,7 @@ export default function Settings() {
 
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
-      <Snackbar
-        open={showAlert}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-      >
-        {showAlert && (
-          <Alert severity={alertType} sx={{ width: "100%" }}>
-            {alertText}
-          </Alert>
-        )}
-      </Snackbar>
+      <AlertSnackbar />
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
         <TextField

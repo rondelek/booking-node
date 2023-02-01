@@ -53,10 +53,6 @@ const UserSchema = new mongoose.Schema({
     homework: String,
   },
 
-  // nextLessonDate: {
-  //   type: Date,
-  // },
-
   lastLessons: [
     {
       date: Date,
@@ -64,15 +60,11 @@ const UserSchema = new mongoose.Schema({
     },
   ],
 
-  // nextLesson: {
-  //   type: String,
-  // },
-
-  // homework: {
-  //   type: String,
-  // },
-
   isPaid: {
+    type: Boolean,
+  },
+
+  isAdmin: {
     type: Boolean,
   },
 });

@@ -209,6 +209,23 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "SET_NEW_DATE_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "SET_NEW_DATE_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Wysłano wiadomość do lektora.",
+    };
+  }
+
   throw new Error(`no such action: ${action.type}`);
 };
 

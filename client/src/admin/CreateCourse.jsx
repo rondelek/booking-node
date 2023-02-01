@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Alert, Button, Snackbar } from "@mui/material";
 import { useAppContext } from "../context/appContext";
+import AlertSnackbar from "../components/Alert";
 
 export default function CreateCourse() {
   const {
@@ -48,17 +49,7 @@ export default function CreateCourse() {
       <h1>create course</h1>
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
         <button onClick={getNewCourses}>fdfd</button>
-        <Snackbar
-          open={showAlert}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "center",
-          }}
-        >
-          <Alert severity={alertType} sx={{ width: "100%" }}>
-            {alertText}
-          </Alert>
-        </Snackbar>
+        <AlertSnackbar />
         <Box sx={{ display: "flex", alignItems: "flex-end" }}>
           <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} />
           <TextField

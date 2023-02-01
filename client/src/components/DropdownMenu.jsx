@@ -11,6 +11,7 @@ import Logout from "@mui/icons-material/Logout";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
+import { Badge } from "@mui/material";
 
 export default function DropdownMenu() {
   const { user, logoutUser } = useAppContext();
@@ -49,8 +50,16 @@ export default function DropdownMenu() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <UserCircleIcon className="icon-click" />
-            <p className="text-xs">{user?.name}</p>
+            <Badge
+              color="primary"
+              badgeContent={1}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              <UserCircleIcon className="icon-click" />
+            </Badge>
           </IconButton>
         </Tooltip>
       </Box>

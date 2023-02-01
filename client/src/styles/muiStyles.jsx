@@ -1,6 +1,13 @@
-import { Button, TextareaAutosize } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  TextareaAutosize,
+} from "@mui/material";
 import { styled } from "@mui/system";
 import { createTheme } from "@mui/material/styles";
+
 // ******* THEME ********
 
 const theme = createTheme({
@@ -29,6 +36,7 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          padding: "5px",
           "& label.Mui-focused": {
             color: "#676C7B",
           },
@@ -47,6 +55,20 @@ const theme = createTheme({
             borderBottomLeftRadius: "1rem",
             borderBottomRightRadius: "1rem",
           },
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          marginLeft: 10,
         },
       },
     },

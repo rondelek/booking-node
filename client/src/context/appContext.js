@@ -1,6 +1,7 @@
 import React, { useReducer, useContext, useEffect, useState } from "react";
 import reducer from "./reducer";
 import axios from "axios";
+import moment from "moment";
 
 const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
@@ -266,6 +267,18 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const sendNewLesson = async (newLesson) => {
+    dispatch({ type: "SET_NEW_DATE_BEGIN" });
+    dispatch({ type: "SET_NEW_DATE_SUCCESS" });
+    console.log(
+      "wysłano wiadomość, nowa data: ",
+      moment(newLesson.date).format("LLL"),
+      " wiadomość: ",
+      newLesson.msg
+    );
+    clearAlert();
+  };
+
   useEffect(() => {
     getAllStudents();
   }, []);
@@ -307,6 +320,7 @@ const AppProvider = ({ children }) => {
         setEditLesson,
         lastLessons,
         setLastLessons,
+        sendNewLesson,
       }}
     >
       {children}

@@ -8,6 +8,7 @@ import NewCourses from "./courses/NewCourses";
 import { Students, CreateCourse } from "./admin";
 import { theme } from "../src/styles/muiStyles";
 import "moment/locale/pl";
+import Messages from "./user/messages/Messages";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="user/settings" element={<Settings />} />
             <Route path="user/profile" element={<Profile />} />
+            <Route path="user/messages" element={<Messages />} />
             <Route path="admin/create-course" element={<CreateCourse />} />
             <Route path="admin/students" element={<Students />} />
             <Route path="courses/new-courses" element={<NewCourses />} />

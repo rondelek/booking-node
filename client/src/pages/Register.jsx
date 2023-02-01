@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import AlertSnackbar from "../components/Alert";
 
 const initialState = {
   name: "",
@@ -122,17 +123,7 @@ export default function Register() {
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
-            <Snackbar
-              open={showAlert}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-            >
-              <Alert severity={alertType} sx={{ width: "100%" }}>
-                {alertText}
-              </Alert>
-            </Snackbar>
+            <AlertSnackbar />
             {!values.isMember && (
               <TextField
                 value={values.name}

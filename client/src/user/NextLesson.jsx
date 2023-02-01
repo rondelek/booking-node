@@ -1,20 +1,19 @@
 import online from "../assets/images/online.svg";
-import onlineTest from "../assets/images/onlineTest.svg";
+import blob from "../assets/images/blob.svg";
+import blob3 from "../assets/images/blob3.svg";
 
 import { TodayIcon } from "./index";
 import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { GreenButton, RedButton } from "../styles/muiStyles";
 import { useAppContext } from "../context/appContext";
-import NextLesson1 from "./NextLesson1";
+import NextLessonBox from "./NextLessonBox";
 import Wrapper from "../assets/wrappers/Lesson";
 
 export default function NextLesson() {
   const { user, updateUser, lastLessons, setLastLessons } = useAppContext();
 
   const { name, email, nextLesson, nextLesson2 } = user;
-
-  console.log(nextLesson2);
 
   const handleUpdateLesson = (e) => {
     e.preventDefault();
@@ -26,23 +25,42 @@ export default function NextLesson() {
     <Wrapper>
       <h1>
         <span>
-          <TodayIcon sx={{ height: "50px" }} />
+          <TodayIcon sx={{ height: "40px" }} />
         </span>
         Następne zajęcia
       </h1>
       <Grid container margin={2} width="auto">
+        <img
+          src={blob}
+          className="-z-10 overflow-hidden absolute max-w-md opacity-30 -left-64 -translate-x-24 top-0"
+          alt=""
+        />
+        <img
+          src={blob3}
+          className="absolute hidden md:block opacity-40 w-[450px] top-64 translate-y-12 -right-36"
+          alt=""
+        />
         <Grid item xs={12} sm={6} sx={{ marginTop: 2, alignSelf: "center" }}>
-          <NextLesson1 />
+          <NextLessonBox />
           <div className="flex-row flex-wrap justify-center mb-8 mt-2 gap-2">
-            <GreenButton variant="contained">przełóż</GreenButton>
-            <RedButton variant="contained">odwołaj</RedButton>
             <Button onClick={handleUpdateLesson}>update</Button>
           </div>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Box sx={{ marginBottom: "2rem" }}>
-            <img src={online} className="md:max-w-[480px] " alt="" />
+          <Box
+            sx={{
+              position: "relative",
+              marginBottom: "2rem",
+              overflow: "hidden",
+            }}
+          >
+            <img src={online} className="max-w-[300px]" alt="" />
+            <img
+              src={blob}
+              className="-z-10 overflow-hidden absolute max-w-md opacity-20 top-0 left-12"
+              alt=""
+            />
           </Box>
         </Grid>
       </Grid>

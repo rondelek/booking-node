@@ -7,10 +7,8 @@ import LessonsHistory from "./LessonsHistory";
 import NextLesson from "./NextLesson";
 
 export default function Profile() {
-  const { user } = useAppContext();
-
   return (
-    <div className="py-8 mx-8 space-y-12">
+    <div className="p-8 md:mx-36 space-y-12">
       <NextLesson />
       <EditLesson />
       <Grid container columnSpacing={3}>
