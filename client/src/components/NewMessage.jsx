@@ -1,36 +1,36 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 import CloseIcon from "@mui/icons-material/Close";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
 
-import {
-  FormControl,
-  FormControlLabel,
-  IconButton,
-  Input,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  Switch,
-  TextareaAutosize,
-} from "@mui/material";
+import { MenuItem, TextareaAutosize, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import ClickIcon from "./ClickIcon";
-import { TextAreaStyle } from "../styles/muiStyles";
 import { SendIcon } from "../user";
+import { useAppContext } from "../context/appContext";
+import { useState } from "react";
 
 export default function NewMessage({ open, setOpen }) {
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState("sm");
+  const [fullWidth, setFullWidth] = useState(false);
+
+  const {
+    user,
+    newMessage,
+    setNewMessage,
+    allStudents,
+    messageParticipantID,
+    setMessageParticipantID,
+    sendMessage,
+  } = useAppContext();
+
+  const otherStudents = allStudents.filter(
+    (student) => student._id !== user._id
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,8 +40,24 @@ export default function NewMessage({ open, setOpen }) {
     setOpen(false);
   };
 
+  const handleSendNewMessage = () => {
+    console.log("wiadomość: ", newMessage);
+    console.log("messagePartfsdfID: ", messageParticipantID);
+    sendMessage(newMessage, messageParticipantID);
+    setNewMessage("");
+    handleClose();
+  };
+
   const handleFullWidthChange = (event) => {
     setFullWidth(!fullWidth);
+  };
+
+  const handleMessageContent = (e) => {
+    setNewMessage(e.target.value);
+  };
+
+  const handleMessageParticipantID = (e) => {
+    setMessageParticipantID(e.target.value);
   };
 
   return (
@@ -77,33 +93,19 @@ export default function NewMessage({ open, setOpen }) {
         </Box>
         <DialogContent sx={{ padding: "0 24px" }}>
           <div className="space-y-2">
-            <FormControl fullWidth variant="standard">
-              <Input
-                id="component-simple"
-                startAdornment={
-                  <InputAdornment position="start">Od:</InputAdornment>
-                }
-                value="jan@gmail.com"
-              />
-            </FormControl>
-            <FormControl fullWidth variant="standard">
-              <Input
-                id="component-simple"
-                startAdornment={
-                  <InputAdornment position="start">Do:</InputAdornment>
-                }
-                value="ewelina@gmail.com"
-              />
-            </FormControl>
-            <FormControl fullWidth variant="standard">
-              <Input
-                id="component-simple"
-                startAdornment={
-                  <InputAdornment position="start">Temat:</InputAdornment>
-                }
-                value="Angielski"
-              />
-            </FormControl>
+            <TextField
+              select
+              label="Wyślij wiadomość do:"
+              variant="standard"
+              onChange={handleMessageParticipantID}
+              fullWidth
+            >
+              {otherStudents.map((student) => (
+                <MenuItem key={student.name} value={student._id}>
+                  {student.name}
+                </MenuItem>
+              ))}
+            </TextField>
             <TextareaAutosize
               minRows={10}
               style={{
@@ -112,6 +114,8 @@ export default function NewMessage({ open, setOpen }) {
                 outline: "none",
                 padding: "10px",
               }}
+              value={newMessage}
+              onChange={handleMessageContent}
             />
           </div>
         </DialogContent>
@@ -120,7 +124,7 @@ export default function NewMessage({ open, setOpen }) {
           <Button
             variant="contained"
             endIcon={<SendIcon />}
-            onClick={handleClose}
+            onClick={handleSendNewMessage}
           >
             wyślij
           </Button>

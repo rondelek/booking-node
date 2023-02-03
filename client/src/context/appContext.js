@@ -23,6 +23,8 @@ const initialState = {
   allStudents: [],
   updateStudentID: "",
   isPaid: "",
+  messageParticipant: "",
+  message: "",
 };
 
 const AppContext = React.createContext();
@@ -38,6 +40,8 @@ const AppProvider = ({ children }) => {
   const [editLesson, setEditLesson] = useState(false);
   const [isEdited, setIsEdited] = useState("");
   const [editTitle, setEditTitle] = useState("");
+  const [newMessage, setNewMessage] = useState("");
+  const [messageParticipantID, setMessageParticipantID] = useState("");
 
   const toggleDrawer = (anchor, open) => (event) => {
     setOpenDrawer(!openDrawer);
@@ -283,6 +287,51 @@ const AppProvider = ({ children }) => {
     getAllStudents();
   }, []);
 
+  const getAllConversations = async () => {
+    // dispatch({ type: "GET_NEW_COURSES_BEGIN" });
+    try {
+      const { data } = await authFetch("/conversations");
+      const { allConversations } = data;
+      // dispatch({
+      //   type: "GET_NEW_COURSES_SUCCESS",
+      //   payload: {
+      //     newCourses,
+      //   },
+      // });
+      console.log(allConversations);
+    } catch (error) {
+      // logoutUser();
+      console.log(error);
+    }
+  };
+
+  const sendMessage = async (message, participant) => {
+    dispatch({ type: "SEND_MESSAGE_BEGIN" });
+    try {
+      const sender = state.user._id;
+      const receiver = participant;
+      const date = new Date();
+      const isRead = false;
+      await authFetch.patch(`/conversations/${sender}`, {
+        receiver,
+        message,
+        date,
+        isRead,
+      });
+      // dispatch({ type: "UPDATE_STUDENT_SUCCESS" });
+    } catch (error) {
+      // if (error.response.status === 401) return;
+      // dispatch({
+      //   type: "UPDATE_STUDENT_ERROR",
+      //   payload: { msg: error.response.data.msg },
+      // });
+      console.log(error);
+    }
+    // clearAlert();
+  };
+
+  // getAllConversations();
+
   return (
     <AppContext.Provider
       value={{
@@ -321,6 +370,11 @@ const AppProvider = ({ children }) => {
         lastLessons,
         setLastLessons,
         sendNewLesson,
+        newMessage,
+        setNewMessage,
+        messageParticipantID,
+        setMessageParticipantID,
+        sendMessage,
       }}
     >
       {children}

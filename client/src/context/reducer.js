@@ -226,6 +226,13 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "SEND_MESSAGE_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
   throw new Error(`no such action: ${action.type}`);
 };
 
