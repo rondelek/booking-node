@@ -1,6 +1,17 @@
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { useAppContext } from "../context/appContext";
 
 export default function Inbox() {
+  const { user, conversations, getUserConversations } = useAppContext();
+
+  const getConv = () => {
+    getUserConversations();
+  };
+
+  const handleUserId = () => {
+    console.log(user);
+  };
+
   return (
     <div className="inbox-container">
       <div className="inbox">
@@ -11,6 +22,8 @@ export default function Inbox() {
             className="members mail-members"
           />
           <div className="msg-content">
+            <button onClick={getConv}>fdfd</button>
+            <button onClick={handleUserId}>user</button>
             <p className="py-[1px] text-sm">Natalie Smith</p>
             <div className="msg-title">Write an articke about design</div>
             <div className="msg-date">22 Feb, 2019</div>

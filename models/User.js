@@ -67,6 +67,23 @@ const UserSchema = new mongoose.Schema({
   isAdmin: {
     type: Boolean,
   },
+
+  conversations: [
+    {
+      participants: [String, String],
+      messages: [
+        {
+          senderID: String,
+          senderName: String,
+          receiverID: String,
+          receiverName: String,
+          message: String,
+          date: Date,
+          isRead: Boolean,
+        },
+      ],
+    },
+  ],
 });
 
 UserSchema.pre("save", async function () {

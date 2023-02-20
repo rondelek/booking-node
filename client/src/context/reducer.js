@@ -233,6 +233,46 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "SEND_MESSAGE_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      user: action.payload.user,
+      showAlert: true,
+      alertType: "success",
+      alertText: action.payload.alertText,
+    };
+  }
+
+  if (action.type === "GET_USER_CONVERSATIONS_BEGIN") {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === "GET_USER_CONVERSATIONS_SUCCESS") {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      conversations: action.payload.conversations,
+    };
+  }
+
+  if (action.type === "SEND_MESSAGE_SUCCESS") {
+    console.log(action.payload.user);
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      conversations: action.payload.conversations,
+      user: action.payload.user,
+    };
+  }
+
   throw new Error(`no such action: ${action.type}`);
 };
 

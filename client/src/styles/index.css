@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap");
+@import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
 
 @layer components {
   .not-found-img {
@@ -513,14 +521,6 @@ summary {
   color: var(--theme-bg-color);
 }
 
-.calendar {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(7, minmax(195px, 1fr));
-  grid-template-rows: 57px;
-  grid-auto-rows: 120px;
-  overflow: auto;
-}
 .calendar-wrapper {
   width: 100%;
   margin: auto;
@@ -904,4 +904,29 @@ summary {
     transform: translateY(76px) scale(0.92);
     opacity: 0;
   }
+}
+
+/* CALENDAR */
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 0.1px solid rgb(234, 229, 229) !important;
+}
+
+.fc .fc-button {
+  background-color: rgb(249, 249, 249) !important;
+  border: none !important;
+  color: rgb(175, 176, 190) !important;
+}
+
+.fc-day-today {
+  background-color: rgb(240, 248, 248) !important;
+}
+
+.fc-icon {
+  color: rgb(146, 149, 168);
+}
+
+.fc-direction-ltr {
+  width: 100%;
 }

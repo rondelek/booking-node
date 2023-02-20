@@ -74,13 +74,12 @@ const updateUser = async (req, res) => {
   user.nextLesson = nextLesson;
   user.homework = homework;
   user.isPaid = isPaid;
-  // user.lastLessons = lastLessons;
 
   await user.save();
 
   const token = user.createJWT();
 
-  res.status(StatusCodes.OK).json({ user, token });
+  res.status(StatusCodes.OK).json({ user });
 };
 
 export { register, login, updateUser };

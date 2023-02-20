@@ -11,7 +11,7 @@ const initialState = {
   alertText: "",
   showAlert: false,
   isLoading: false,
-  user: user ? JSON.parse(user) : null,
+  user: JSON.parse(user),
   token: token,
   name: "",
   level: "",
@@ -25,6 +25,8 @@ const initialState = {
   isPaid: "",
   messageParticipant: "",
   message: "",
+  // conversations: [],
+  messages: [],
 };
 
 const AppContext = React.createContext();
@@ -162,7 +164,6 @@ const AppProvider = ({ children }) => {
   };
 
   const updateUser = async (currentUser) => {
-    console.log(currentUser);
     dispatch({ type: "UPDATE_USER_BEGIN" });
     try {
       const { data } = await authFetch.patch("/auth", currentUser);
@@ -287,38 +288,54 @@ const AppProvider = ({ children }) => {
     getAllStudents();
   }, []);
 
-  const getAllConversations = async () => {
-    // dispatch({ type: "GET_NEW_COURSES_BEGIN" });
-    try {
-      const { data } = await authFetch("/conversations");
-      const { allConversations } = data;
-      // dispatch({
-      //   type: "GET_NEW_COURSES_SUCCESS",
-      //   payload: {
-      //     newCourses,
-      //   },
-      // });
-      console.log(allConversations);
-    } catch (error) {
-      // logoutUser();
-      console.log(error);
-    }
-  };
+  // const getAllConversations = async () => {
+  //   // dispatch({ type: "GET_NEW_COURSES_BEGIN" });
+  //   try {
+  //     const { data } = await authFetch("/conversations");
+  //     const { allConversations } = data;
+  //     // dispatch({
+  //     //   type: "GET_NEW_COURSES_SUCCESS",
+  //     //   payload: {
+  //     //     newCourses,
+  //     //   },
+  //     // });
+  //     console.log(allConversations);
+  //   } catch (error) {
+  //     // logoutUser();
+  //     console.log(error);
+  //   }
+  // };
 
-  const sendMessage = async (message, participant) => {
+  // const getUserConversations = async () => {
+  //   dispatch({ type: "GET_USER_CONVERSATIONS_BEGIN" });
+  //   try {
+  //     const { data } = await authFetch(`/conversations/${state.user._id}`);
+  //     const conversations = data.conversations;
+  //     console.log(conversations);
+  //     dispatch({
+  //       type: "GET_USER_CONVERSATIONS_SUCCESS",
+  //       payload: {
+  //         conversations,
+  //         user,
+  //       },
+  //     });
+  //   } catch (error) {
+  //     // logoutUser();
+  //   }
+  // };
+
+  const sendMessage = async (messageData) => {
     dispatch({ type: "SEND_MESSAGE_BEGIN" });
     try {
-      const sender = state.user._id;
-      const receiver = participant;
-      const date = new Date();
-      const isRead = false;
-      await authFetch.patch(`/conversations/${sender}`, {
-        receiver,
-        message,
-        date,
-        isRead,
+      const { data } = await authFetch.patch(
+        `/conversations/${state.user._id}`,
+        messageData
+      );
+      console.log(data);
+      dispatch({
+        type: "SEND_MESSAGE_SUCCESS",
+        payload: { user },
       });
-      // dispatch({ type: "UPDATE_STUDENT_SUCCESS" });
     } catch (error) {
       // if (error.response.status === 401) return;
       // dispatch({
@@ -375,6 +392,7 @@ const AppProvider = ({ children }) => {
         messageParticipantID,
         setMessageParticipantID,
         sendMessage,
+        // getUserConversations,
       }}
     >
       {children}

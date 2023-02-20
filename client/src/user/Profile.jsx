@@ -1,6 +1,5 @@
 import { Box, Grid } from "@mui/material";
 import DrawerMenu from "../components/DrawerMenu";
-import { useAppContext } from "../context/appContext";
 import EditLesson from "./EditLesson";
 import LastLesson from "./LastLesson";
 import LessonsHistory from "./LessonsHistory";

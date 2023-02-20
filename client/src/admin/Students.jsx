@@ -5,11 +5,16 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { Button } from "@mui/material";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import Calendar from "./Calendar";
+import { gapi } from "gapi-script";
+import Calendar3 from "./Calendar3";
+import Calendar2 from "./Calendar2";
+import Calendar4 from "./Calendar4";
+import Calendar5 from "./Calendar5";
 
 export default function Students() {
   const {
-    user,
     getAllStudents,
     allStudents,
     updateStudent,
@@ -23,8 +28,8 @@ export default function Students() {
     }
   }, [isPaid]);
 
-  const handleCellClick = () => {
-    console.log("handle cell click");
+  const handleEmail = (params) => {
+    window.location = `mailto:${params.row.email}`;
   };
 
   const columns = [
@@ -34,20 +39,16 @@ export default function Students() {
       flex: 1,
       renderCell: (params) => {
         return (
-          <>
-            <p
-              onClick={(event) => {
-                handleCellClick(event, params);
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              {params.value}
-            </p>
-          </>
+          <p>
+            {params.value}
+            <MailOutlineIcon
+              sx={{ width: "1rem", marginLeft: ".625rem", cursor: "pointer" }}
+              onClick={() => handleEmail(params)}
+            />
+          </p>
         );
       },
     },
-    { field: "email", headerName: "Email", flex: 1 },
     {
       field: "isPaid",
       headerName: "Opłata",
@@ -105,15 +106,16 @@ export default function Students() {
   };
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <h1>Kursanci</h1>
-      <DataGrid
+    <div style={{ height: 700, width: "100%", marginTop: "60px" }}>
+      <Calendar5 />
+      {/* <Calendar2 /> */}
+      {/* <DataGrid
         rows={allStudents}
         columns={columns}
         getRowId={(row) => row._id}
         onCellEditCommit={handleUpdate}
         hideFooter={true}
-      />
+      /> */}
     </div>
   );
 }

@@ -106,7 +106,6 @@ export default function EditLesson() {
       <Dialog open={editLesson} onClose={toggleEditLesson}>
         <DialogTitle>{editTitle}</DialogTitle>
         <DialogContent>
-          <DialogContentText></DialogContentText>
           {isEdited === "homework" && (
             <TextAreaStyle
               autoFocus

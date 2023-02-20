@@ -9,9 +9,9 @@ export default function MessageContent() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="feather feather-clock"
         >
           <circle cx="12" cy="12" r="10" />
@@ -43,9 +43,9 @@ export default function MessageContent() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-file-text"
           >
             <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -64,9 +64,9 @@ export default function MessageContent() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-download-cloud"
           >
             <path d="M8 17l4 4 4-4M12 12v9" />

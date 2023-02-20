@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   Button,
   TextareaAutosize,
+  TextField,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { createTheme } from "@mui/material/styles";
@@ -36,7 +37,7 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          padding: "5px",
+          // padding: "5px",
           "& label.Mui-focused": {
             color: "#676C7B",
           },

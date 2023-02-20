@@ -4,8 +4,10 @@ const ConversationSchema = new mongoose.Schema({
   participants: [String, String],
   messages: [
     {
-      sender: String,
-      receiver: String,
+      senderID: String,
+      senderName: String,
+      receiverID: String,
+      receiverName: String,
       message: String,
       date: Date,
       isRead: Boolean,

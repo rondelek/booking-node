@@ -1,10 +1,6 @@
 import Wrapper from "../../assets/wrappers/Messages";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Grid } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import { Box } from "@mui/system";
-import MessageItem from "./MessageItem";
-import message from "../../assets/images/message.svg";
 import Test from "./Test";
 
 export default function Messages() {

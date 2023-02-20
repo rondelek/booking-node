@@ -41,9 +41,9 @@ export default function NewMessage({ open, setOpen }) {
   };
 
   const handleSendNewMessage = () => {
-    console.log("wiadomość: ", newMessage);
-    console.log("messagePartfsdfID: ", messageParticipantID);
-    sendMessage(newMessage, messageParticipantID);
+    const message = newMessage;
+    const receiverID = messageParticipantID;
+    sendMessage({ message, receiverID });
     setNewMessage("");
     handleClose();
   };
