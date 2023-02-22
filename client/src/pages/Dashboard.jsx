@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAppContext } from "../context/appContext";
-import { Searchbox } from "../components";
+import { Hero } from "../components";
+import Offer from "../components/Offer";
 
 export default function Dashboard() {
   const { user, token, logoutUser } = useAppContext();
@@ -21,7 +22,8 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Searchbox />
+      <Hero />
+      <Offer />
     </div>
   );
 }

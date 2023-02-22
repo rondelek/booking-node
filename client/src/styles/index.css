@@ -930,3 +930,64 @@ summary {
 .fc-direction-ltr {
   width: 100%;
 }
+
+.rotate {
+  animation: rotation 8s infinite linear;
+}
+
+.offer-item {
+  /* height: 300px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden; */
+  width: 200px;
+  line-height: 1.5rem;
+  border-radius: 30% 70% 70% 30% / 63% 69% 31% 37%;
+  background-size: 100%;
+  background-image: url("../assets/images/blob4.svg");
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.5s ease-in-out;
+  padding: 1.2rem;
+}
+
+.offer-item:hover {
+  /* background-size: cover; */
+  background-size: 400%;
+  background-position: 50% 50%;
+}
+
+.MuiButton-outlined {
+  border-radius: 50px !important;
+}
+
+.MuiButton-endIcon {
+  position: absolute;
+  transform: translateX(150px);
+  animation: linear infinite;
+  animation-name: run;
+  animation-duration: 2s;
+}
+@keyframes run {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 5px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
