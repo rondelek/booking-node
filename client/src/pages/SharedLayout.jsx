@@ -4,7 +4,7 @@ import { Footer, Navbar } from "../components";
 export default function SharedLayout() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
       {/* <Footer /> */}
     </div>

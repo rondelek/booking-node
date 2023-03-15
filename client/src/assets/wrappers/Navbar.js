@@ -5,7 +5,8 @@ const Wrapper = styled.nav`
   justify-items: center;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 2px 3px 24px -13px rgba(66, 68, 90, 1);
+  background-color: transparent;
+  /* box-shadow: 2px 3px 24px -13px rgba(66, 68, 90, 1); */
   padding: 1rem;
 `;
 

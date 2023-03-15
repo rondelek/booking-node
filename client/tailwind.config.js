@@ -4,15 +4,15 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      yellow: "#f8c36f",
+      yellow: "#feb538",
       blue: "#0c7dcb",
       pink: "#f6737f",
       dark: "#09153D",
       red: "#EE1C47",
-      orange: "#FF823A",
+      orange: "rgba(255, 164, 0, 0.83)",
       gray: "#676C7B",
       "red-dark": "#ce0b32",
-      white: "rgb(248 250 252)",
+      white: "#fdfcfc",
       gold: "#FFD700",
       transparent: "transparent",
     },

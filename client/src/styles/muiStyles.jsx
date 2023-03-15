@@ -28,7 +28,7 @@ const theme = createTheme({
           fontWeight: "600",
           background: "primary",
           "&:hover": {
-            background: "#f5ba5b",
+            background: "#feb538",
             color: "white",
           },
         },
@@ -98,6 +98,39 @@ const RedButton = styled(Button)({
   },
 });
 
+const BlackRoundedButton = styled(Button)({
+  position: "relative",
+  backgroundColor: "#000",
+  color: "#fff",
+  fontSize: "2.6vh",
+  borderRadius: "50px",
+  padding: ".5rem 2.5rem .5rem 2rem",
+  cursor: "pointer",
+  "& .MuiButton-endIcon": {
+    color: "#feb538",
+  },
+  "&:hover": {
+    backgroundColor: "#feb538",
+    color: "#000",
+    cursor: "pointer",
+    "& .MuiButton-endIcon": {
+      color: "#000",
+    },
+  },
+});
+
+const YellowRoundedButton = styled(Button)({
+  backgroundColor: "#feb538",
+  color: "#fff",
+  fontSize: "2.6vh",
+  borderRadius: "50px",
+  padding: ".5rem 2rem",
+  "&:hover": {
+    // backgroundColor: "#000",
+    color: "#000",
+  },
+});
+
 // ******* TEXTAREA ********
 
 const TextAreaStyle = styled(TextareaAutosize)({
@@ -111,4 +144,11 @@ const TextAreaStyle = styled(TextareaAutosize)({
   padding: ".5rem",
 });
 
-export { GreenButton, RedButton, TextAreaStyle, theme };
+export {
+  GreenButton,
+  RedButton,
+  BlackRoundedButton,
+  YellowRoundedButton,
+  TextAreaStyle,
+  theme,
+};
