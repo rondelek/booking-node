@@ -1,0 +1,27 @@
+.button-trial {
+  outline: none;
+  text-decoration: none;
+  text-shadow: none;
+  font-weight: 500;
+  border: none;
+  border-radius: 50px;
+  background: #131415;
+  color: #fff;
+  font-family: Poppins;
+  padding: 18px 20px 18px 30px;
+  transition: 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.arrow-right {
+  color: #f8c46f;
+}
+
+.button-trial:hover {
+  background: #f8c46f;
+  color: #000;
+}
+
+.button-trial:hover ~ .arrow-right {
+  color: #000;
+}
