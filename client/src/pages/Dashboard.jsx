@@ -1,45 +1,38 @@
-import { useEffect } from "react";
-import { useAppContext } from "../context/appContext";
-import { Hero, Navbar } from "../components";
+import { motion } from "framer-motion";
+
 import Offer from "../components/Offer";
-import HowWeTeach from "../components/FirstLesson";
-import FirstLesson from "../components/FirstLesson";
-import HowItWorks from "../components/HowItWorks";
-import Hero2 from "../components/Hero2";
-import Hero3 from "../components/Hero3";
+import Hero from "../components/Hero";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef } from "react";
 import Courses from "../components/Courses";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { useScroll, useSpring } from "framer-motion";
+import Pricing from "../components/Pricing";
+import Contact from "../components/Contact";
+import NavbarMobile from "../components/NavbarMobile";
+
+import {
+  Link,
+  Button,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
+import { Navbar } from "../components";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Dashboard() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+    stiffness: 900,
+    damping: 60,
+    restDelta: 0.8,
   });
-  // const { user, token, logoutUser } = useAppContext();
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch("/api/v1");
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   const component = useRef();
   const slider = useRef();
 
@@ -64,12 +57,13 @@ export default function Dashboard() {
   return (
     <div ref={component} className="container-wrapper">
       <Navbar />
-      {/* <motion.div className="progress-bar" style={{ scaleX }} /> */}
-
-      <div className="container" ref={slider}>
-        <Hero3 />
+      <NavbarMobile />
+      <div className="container relative" ref={slider}>
+        <Hero />
         <Courses />
-        <Hero3 />
+        <Pricing />
+        <Offer />
+        <Contact />
       </div>
     </div>
   );

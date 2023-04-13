@@ -17,7 +17,7 @@ const theme = createTheme({
       main: "#f8c36f",
     },
     secondary: {
-      main: "#676C7B",
+      main: "#fdfdfd",
     },
   },
   components: {
@@ -119,6 +119,27 @@ const BlackRoundedButton = styled(Button)({
   },
 });
 
+const BlackRoundedButtonTextYellow = styled(Button)({
+  position: "relative",
+  backgroundColor: "#000",
+  color: "#fff",
+  fontSize: "2.6vh",
+  borderRadius: "50px",
+  padding: ".5rem 2.5rem",
+  cursor: "pointer",
+  "& .MuiButton-endIcon": {
+    color: "#feb538",
+  },
+  "&:hover": {
+    backgroundColor: "#000",
+    color: "#feb538",
+    cursor: "pointer",
+    "& .MuiButton-endIcon": {
+      color: "#000",
+    },
+  },
+});
+
 const YellowRoundedButton = styled(Button)({
   backgroundColor: "#feb538",
   color: "#fff",
@@ -148,6 +169,7 @@ export {
   GreenButton,
   RedButton,
   BlackRoundedButton,
+  BlackRoundedButtonTextYellow,
   YellowRoundedButton,
   TextAreaStyle,
   theme,

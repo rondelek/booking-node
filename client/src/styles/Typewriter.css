@@ -1,20 +1,3 @@
-.hero-text {
-  /* width: 70%; */
-  font-size: 3.5rem;
-  color: #2c2d2f;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  line-height: 4.5rem;
-  font-weight: 700;
-  /* padding: 3rem; */
-}
-
-@media screen and (max-width: 1102px) {
-  .hero-text {
-    text-align: center;
-  }
-}
-
 /* Typewriter effect 1 */
 @keyframes typing {
   0.0000%,

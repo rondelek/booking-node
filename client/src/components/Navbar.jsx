@@ -1,33 +1,25 @@
+import { NavLink } from "react-router-dom";
+
+import { Link } from "react-router-dom";
+
 import logo from "../assets/images/logo.png";
 
 import { motion } from "framer-motion";
 
 import {
-  textContainer,
-  textVariant2,
-  slideIn,
   staggerContainer,
-  fadeIn,
-  textVariant,
-  planetVariants,
-  zoomIn,
   footerVariants,
-  footerVariants2,
-  footerVariants3,
   footerVariants4,
 } from "../utils/motion";
 
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { YellowRoundedButton } from "../styles/muiStyles";
 
 export default function Navbar() {
   return (
-    <div className="flex flex-col fixed h-full bg-[#fdfcfc] shadow-2xl p-4 z-10">
-      <img
-        src={logo}
-        className="relative w-[16vh] z-10 pr-5 pl-1 pt-1 pb-1 mt-5 ml-5"
-        alt=""
-      />
+    <div className="navbar w-[200px] flex-col items-center fixed h-full bg-[#fdfcfc] shadow-2xl p-4 z-10">
+      <img src={logo} className="pt-4 w-[16vh] z-10" alt="" />
 
       <motion.ul
         variants={staggerContainer}
@@ -43,7 +35,9 @@ export default function Navbar() {
           viewport={{ once: false, amount: 0.5 }}
           className="menu-item menu-item-chosen relative"
         >
-          Kursy
+          <NavLink activeStyle={{ color: "#5754a8" }} to="/about-us">
+            O nas
+          </NavLink>
         </motion.li>
         <motion.li
           variants={footerVariants4(0.7)}
@@ -54,6 +48,7 @@ export default function Navbar() {
         >
           Cennik
         </motion.li>
+
         <motion.li
           variants={footerVariants4(0.9)}
           initial="hidden"
@@ -61,7 +56,7 @@ export default function Navbar() {
           viewport={{ once: false, amount: 0.5 }}
           className="menu-item relative"
         >
-          O nas
+          Oferta
         </motion.li>
         <motion.li
           variants={footerVariants4(1.1)}
@@ -77,16 +72,14 @@ export default function Navbar() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.5 }}
-          className="menu-item relative"
         >
-          Kontakt
+          <YellowRoundedButton>Zapisz się</YellowRoundedButton>
         </motion.li>
       </motion.ul>
-      <motion.div className="flex justify-around justify-self-end pb-12 mt-auto">
+      <motion.div className="flex justify-around justify-self-end w-full pb-12 mt-auto">
         <motion.div
           variants={footerVariants(1.2)}
           initial="hidden"
-          whileInVi
           className="social"
           whileInView="show"
           viewport={{ once: false, amount: 0.5 }}
@@ -99,7 +92,6 @@ export default function Navbar() {
           initial="hidden"
           whileInView="show"
           className="social"
-          ew="show"
           viewport={{ once: false, amount: 0.5 }}
         >
           <FaInstagram className="w-4 h-4 outline-offset-[6px] outline outline-yellow rounded-full" />

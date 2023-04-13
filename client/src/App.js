@@ -9,22 +9,19 @@ import { Students, CreateCourse } from "./admin";
 import { theme } from "../src/styles/muiStyles";
 import "moment/locale/pl";
 import Messages from "./user/messages/Messages";
+import Courses from "./components/Courses";
+import Pricing from "./components/Pricing";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <SharedLayout />
-              </ProtectedRoute>
-            }
-          >
+          <Route path="/" element={<SharedLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="user/settings" element={<Settings />} />
+            <Route path="about-us" element={<Courses />} />
+            {/* <Route path="pricing" element={<Pricing />} /> */}
             <Route path="user/profile" element={<Profile />} />
             <Route path="user/messages" element={<Messages />} />
             <Route path="admin/create-course" element={<CreateCourse />} />
